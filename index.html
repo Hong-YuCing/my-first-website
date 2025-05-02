@@ -1,27 +1,117 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一個GitHub網頁</title>
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f8ff;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join the Respawn Team</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+    }
+
+    .slider {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      padding-right: 5%;
+      background-color: #fff5f0;
+    }
+
+    .left h2 {
+      color: #ff4c00;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .left h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #222;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #ff4c00;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    .right {
+      flex: 1;
+      position: relative;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .slide-image.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .indicator {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <h1>你好！這是我第一個放到 GitHub 的網頁！</h1>
-    <p>很開心第一次自己上傳成功 🎉</p>
+  <div class="slider">
+    <div class="left">
+      <h2>WE'RE HIRING!</h2>
+      <h1>JOIN THE<br>RESPAWN TEAM</h1>
+      <a href="#" class="btn">SEE JOBS</a>
+    </div>
+    <div class="right">
+      <img src="https://via.placeholder.com/800x600?text=Slide+1" class="slide-image active" />
+      <img src="https://via.placeholder.com/800x600?text=Slide+2" class="slide-image" />
+      <img src="https://via.placeholder.com/800x600?text=Slide+3" class="slide-image" />
+      <div class="indicator" id="indicator">01 / 03</div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll(".slide-image");
+    const indicator = document.getElementById("indicator");
+    let index = 0;
+
+    function showSlide(i) {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle("active", idx === i);
+      });
+      indicator.textContent = `${String(i + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    }
+
+    setInterval(() => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }, 3000);
+  </script>
 </body>
 </html>
